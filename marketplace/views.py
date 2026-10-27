@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
+from django.db import IntegrityError
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
@@ -20,9 +21,17 @@ def home(request):
 def register(request):
     form = RegistrationForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
-        user = form.save()
-        login(request, user)
-        return redirect('dashboard')
+        try:
+            user = form.save()
+        except IntegrityError:
+            # save() is atomic: its failed insert has rolled back before we query.
+            # A concurrent registration can take the username after is_valid().
+            form.validate_unique()
+            if 'username' not in form.errors:
+                raise  # Do not disguise unrelated database failures as duplicates.
+        else:
+            login(request, user)
+            return redirect('dashboard')
     return render(request, 'form.html', {'form': form, 'title': 'Your next chapter starts here', 'button': 'Create account'})
 
 def detail(request, pk):

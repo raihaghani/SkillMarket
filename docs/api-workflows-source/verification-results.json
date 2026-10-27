@@ -1,0 +1,258 @@
+{
+  "root_anonymous": {
+    "status": 403,
+    "body": {
+      "detail": "Authentication credentials were not provided."
+    }
+  },
+  "anonymous_offers": {
+    "status": 403,
+    "body": {
+      "detail": "Authentication credentials were not provided."
+    }
+  },
+  "create": {
+    "status": 201,
+    "body": {
+      "id": 1,
+      "listing": 1,
+      "buyer": 1,
+      "offered_price": "100.00",
+      "message": "Please build a portfolio website.",
+      "status": "PENDING",
+      "created_at": "2026-10-27T18:11:23.567094Z",
+      "updated_at": "2026-10-27T18:11:23.567094Z"
+    }
+  },
+  "buyer_accept": {
+    "status": 403,
+    "body": {
+      "detail": "A seller account is required."
+    }
+  },
+  "other_seller_accept": {
+    "status": 404,
+    "body": {
+      "detail": "No Offer matches the given query."
+    }
+  },
+  "accept": {
+    "status": 200,
+    "body": {
+      "id": 1,
+      "listing": 1,
+      "buyer": 1,
+      "offered_price": "100.00",
+      "message": "Please build a portfolio website.",
+      "status": "ACCEPTED",
+      "created_at": "2026-10-27T18:11:23.567094Z",
+      "updated_at": "2026-10-27T18:11:23.567094Z"
+    }
+  },
+  "repeat_accept": {
+    "status": 400,
+    "body": [
+      "This action is not valid for the current offer status."
+    ]
+  },
+  "root": {
+    "status": 200,
+    "body": {
+      "listings": "http://testserver/api/listings/",
+      "offers": "http://testserver/api/offers/",
+      "reviews": "http://testserver/api/reviews/"
+    }
+  },
+  "listing": {
+    "status": 200,
+    "body": {
+      "id": 1,
+      "seller": 2,
+      "seller_name": "api_seller",
+      "title": "Build a portfolio website",
+      "description": "A custom portfolio website for your independent business.",
+      "category": "Web Development",
+      "starting_price": "150.00",
+      "status": "ACTIVE",
+      "created_at": "2026-10-27T18:11:23.471908Z",
+      "updated_at": "2026-10-27T18:11:23.471908Z"
+    }
+  },
+  "review_get": {
+    "status": 405,
+    "body": {
+      "detail": "Method \"GET\" not allowed."
+    }
+  },
+  "complete": {
+    "status": 200,
+    "body": {
+      "id": 1,
+      "listing": 1,
+      "buyer": 1,
+      "offered_price": "100.00",
+      "message": "Please build a portfolio website.",
+      "status": "COMPLETED",
+      "created_at": "2026-10-27T18:11:23.567094Z",
+      "updated_at": "2026-10-27T18:11:23.586805Z"
+    }
+  },
+  "review": {
+    "status": 201,
+    "body": {
+      "id": 1,
+      "offer": 1,
+      "reviewer": 1,
+      "seller": 2,
+      "rating": 5,
+      "comment": "Excellent communication and thoughtful work.",
+      "created_at": "2026-10-27T18:11:23.599371Z"
+    }
+  },
+  "routes": [
+    {
+      "pattern": "^listings/$",
+      "name": "listing-list",
+      "actions": {
+        "get": "list",
+        "post": "create",
+        "head": "list"
+      }
+    },
+    {
+      "pattern": "^listings\\.(?P<format>[a-z0-9]+)/?$",
+      "name": "listing-list",
+      "actions": {
+        "get": "list",
+        "post": "create",
+        "head": "list"
+      }
+    },
+    {
+      "pattern": "^listings/(?P<pk>[^/.]+)/$",
+      "name": "listing-detail",
+      "actions": {
+        "get": "retrieve",
+        "put": "update",
+        "patch": "partial_update",
+        "delete": "destroy",
+        "head": "retrieve"
+      }
+    },
+    {
+      "pattern": "^listings/(?P<pk>[^/.]+)\\.(?P<format>[a-z0-9]+)/?$",
+      "name": "listing-detail",
+      "actions": {
+        "get": "retrieve",
+        "put": "update",
+        "patch": "partial_update",
+        "delete": "destroy",
+        "head": "retrieve"
+      }
+    },
+    {
+      "pattern": "^listings/(?P<pk>[^/.]+)/reviews/$",
+      "name": "listing-reviews",
+      "actions": {
+        "get": "reviews"
+      }
+    },
+    {
+      "pattern": "^listings/(?P<pk>[^/.]+)/reviews\\.(?P<format>[a-z0-9]+)/?$",
+      "name": "listing-reviews",
+      "actions": {
+        "get": "reviews"
+      }
+    },
+    {
+      "pattern": "^offers/$",
+      "name": "offer-list",
+      "actions": {
+        "get": "list",
+        "post": "create",
+        "head": "list"
+      }
+    },
+    {
+      "pattern": "^offers\\.(?P<format>[a-z0-9]+)/?$",
+      "name": "offer-list",
+      "actions": {
+        "get": "list",
+        "post": "create",
+        "head": "list"
+      }
+    },
+    {
+      "pattern": "^offers/(?P<pk>[^/.]+)/accept/$",
+      "name": "offer-accept",
+      "actions": {
+        "post": "accept"
+      }
+    },
+    {
+      "pattern": "^offers/(?P<pk>[^/.]+)/accept\\.(?P<format>[a-z0-9]+)/?$",
+      "name": "offer-accept",
+      "actions": {
+        "post": "accept"
+      }
+    },
+    {
+      "pattern": "^offers/(?P<pk>[^/.]+)/complete/$",
+      "name": "offer-complete",
+      "actions": {
+        "post": "complete"
+      }
+    },
+    {
+      "pattern": "^offers/(?P<pk>[^/.]+)/complete\\.(?P<format>[a-z0-9]+)/?$",
+      "name": "offer-complete",
+      "actions": {
+        "post": "complete"
+      }
+    },
+    {
+      "pattern": "^offers/(?P<pk>[^/.]+)/reject/$",
+      "name": "offer-reject",
+      "actions": {
+        "post": "reject"
+      }
+    },
+    {
+      "pattern": "^offers/(?P<pk>[^/.]+)/reject\\.(?P<format>[a-z0-9]+)/?$",
+      "name": "offer-reject",
+      "actions": {
+        "post": "reject"
+      }
+    },
+    {
+      "pattern": "^reviews/$",
+      "name": "review-list",
+      "actions": {
+        "post": "create"
+      }
+    },
+    {
+      "pattern": "^reviews\\.(?P<format>[a-z0-9]+)/?$",
+      "name": "review-list",
+      "actions": {
+        "post": "create"
+      }
+    },
+    {
+      "pattern": "",
+      "name": "api-root",
+      "actions": {}
+    },
+    {
+      "pattern": "<drf_format_suffix:format>",
+      "name": "api-root",
+      "actions": {}
+    }
+  ],
+  "verification": {
+    "tests_run": 30,
+    "failures": 0,
+    "errors": 0,
+    "database": "isolated SQLite test database"
+  }
+}

@@ -1,0 +1,2038 @@
+{
+  "auth_permission": {
+    "fields": [
+      {
+        "column": "id",
+        "django_type": "AutoField",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": true,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "name",
+        "django_type": "CharField",
+        "resolved_type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "content_type_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "django_content_type",
+        "on_delete": "CASCADE",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "codename",
+        "django_type": "CharField",
+        "resolved_type": "varchar(100)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      }
+    ],
+    "ddl": "CREATE TABLE \"auth_permission\" (\"id\" integer NOT NULL PRIMARY KEY AUTOINCREMENT, \"content_type_id\" integer NOT NULL REFERENCES \"django_content_type\" (\"id\") DEFERRABLE INITIALLY DEFERRED, \"codename\" varchar(100) NOT NULL, \"name\" varchar(255) NOT NULL)",
+    "columns": [
+      [
+        0,
+        "id",
+        "INTEGER",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "content_type_id",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "codename",
+        "varchar(100)",
+        1,
+        null,
+        0
+      ],
+      [
+        3,
+        "name",
+        "varchar(255)",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        0,
+        0,
+        "django_content_type",
+        "content_type_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "constraints": {
+      "auth_permission_content_type_id_2f476e4b": {
+        "columns": [
+          "content_type_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "auth_permission_content_type_id_codename_01ab375a_uniq": {
+        "columns": [
+          "content_type_id",
+          "codename"
+        ],
+        "primary_key": false,
+        "unique": true,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC",
+          "ASC"
+        ]
+      },
+      "__primary__": {
+        "columns": [
+          "id"
+        ],
+        "primary_key": true,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      },
+      "fk_0": {
+        "columns": [
+          "content_type_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "django_content_type",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      }
+    }
+  },
+  "auth_group_permissions": {
+    "fields": [
+      {
+        "column": "id",
+        "django_type": "AutoField",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": true,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "group_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "auth_group",
+        "on_delete": "CASCADE",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "permission_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "auth_permission",
+        "on_delete": "CASCADE",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      }
+    ],
+    "ddl": "CREATE TABLE \"auth_group_permissions\" (\"id\" integer NOT NULL PRIMARY KEY AUTOINCREMENT, \"group_id\" integer NOT NULL REFERENCES \"auth_group\" (\"id\") DEFERRABLE INITIALLY DEFERRED, \"permission_id\" integer NOT NULL REFERENCES \"auth_permission\" (\"id\") DEFERRABLE INITIALLY DEFERRED)",
+    "columns": [
+      [
+        0,
+        "id",
+        "INTEGER",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "group_id",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "permission_id",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        0,
+        0,
+        "auth_permission",
+        "permission_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        1,
+        0,
+        "auth_group",
+        "group_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "constraints": {
+      "auth_group_permissions_permission_id_84c5c92e": {
+        "columns": [
+          "permission_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "auth_group_permissions_group_id_b120cbf9": {
+        "columns": [
+          "group_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "auth_group_permissions_group_id_permission_id_0cd325b0_uniq": {
+        "columns": [
+          "group_id",
+          "permission_id"
+        ],
+        "primary_key": false,
+        "unique": true,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC",
+          "ASC"
+        ]
+      },
+      "__primary__": {
+        "columns": [
+          "id"
+        ],
+        "primary_key": true,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      },
+      "fk_0": {
+        "columns": [
+          "permission_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "auth_permission",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      },
+      "fk_1": {
+        "columns": [
+          "group_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "auth_group",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      }
+    }
+  },
+  "auth_group": {
+    "fields": [
+      {
+        "column": "id",
+        "django_type": "AutoField",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": true,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "name",
+        "django_type": "CharField",
+        "resolved_type": "varchar(150)",
+        "null": false,
+        "primary_key": false,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      }
+    ],
+    "ddl": "CREATE TABLE \"auth_group\" (\"id\" integer NOT NULL PRIMARY KEY AUTOINCREMENT, \"name\" varchar(150) NOT NULL UNIQUE)",
+    "columns": [
+      [
+        0,
+        "id",
+        "INTEGER",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "name",
+        "varchar(150)",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [],
+    "constraints": {
+      "__unnamed_constraint_1__": {
+        "unique": true,
+        "columns": [
+          "name"
+        ],
+        "primary_key": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      },
+      "__primary__": {
+        "columns": [
+          "id"
+        ],
+        "primary_key": true,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      }
+    }
+  },
+  "auth_user_groups": {
+    "fields": [
+      {
+        "column": "id",
+        "django_type": "AutoField",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": true,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "user_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "auth_user",
+        "on_delete": "CASCADE",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "group_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "auth_group",
+        "on_delete": "CASCADE",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      }
+    ],
+    "ddl": "CREATE TABLE \"auth_user_groups\" (\"id\" integer NOT NULL PRIMARY KEY AUTOINCREMENT, \"user_id\" integer NOT NULL REFERENCES \"auth_user\" (\"id\") DEFERRABLE INITIALLY DEFERRED, \"group_id\" integer NOT NULL REFERENCES \"auth_group\" (\"id\") DEFERRABLE INITIALLY DEFERRED)",
+    "columns": [
+      [
+        0,
+        "id",
+        "INTEGER",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "user_id",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "group_id",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        0,
+        0,
+        "auth_group",
+        "group_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        1,
+        0,
+        "auth_user",
+        "user_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "constraints": {
+      "auth_user_groups_group_id_97559544": {
+        "columns": [
+          "group_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "auth_user_groups_user_id_6a12ed8b": {
+        "columns": [
+          "user_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "auth_user_groups_user_id_group_id_94350c0c_uniq": {
+        "columns": [
+          "user_id",
+          "group_id"
+        ],
+        "primary_key": false,
+        "unique": true,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC",
+          "ASC"
+        ]
+      },
+      "__primary__": {
+        "columns": [
+          "id"
+        ],
+        "primary_key": true,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      },
+      "fk_0": {
+        "columns": [
+          "group_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "auth_group",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      },
+      "fk_1": {
+        "columns": [
+          "user_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "auth_user",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      }
+    }
+  },
+  "auth_user_user_permissions": {
+    "fields": [
+      {
+        "column": "id",
+        "django_type": "AutoField",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": true,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "user_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "auth_user",
+        "on_delete": "CASCADE",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "permission_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "auth_permission",
+        "on_delete": "CASCADE",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      }
+    ],
+    "ddl": "CREATE TABLE \"auth_user_user_permissions\" (\"id\" integer NOT NULL PRIMARY KEY AUTOINCREMENT, \"user_id\" integer NOT NULL REFERENCES \"auth_user\" (\"id\") DEFERRABLE INITIALLY DEFERRED, \"permission_id\" integer NOT NULL REFERENCES \"auth_permission\" (\"id\") DEFERRABLE INITIALLY DEFERRED)",
+    "columns": [
+      [
+        0,
+        "id",
+        "INTEGER",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "user_id",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "permission_id",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        0,
+        0,
+        "auth_permission",
+        "permission_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        1,
+        0,
+        "auth_user",
+        "user_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "constraints": {
+      "auth_user_user_permissions_permission_id_1fbb5f2c": {
+        "columns": [
+          "permission_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "auth_user_user_permissions_user_id_a95ead1b": {
+        "columns": [
+          "user_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq": {
+        "columns": [
+          "user_id",
+          "permission_id"
+        ],
+        "primary_key": false,
+        "unique": true,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC",
+          "ASC"
+        ]
+      },
+      "__primary__": {
+        "columns": [
+          "id"
+        ],
+        "primary_key": true,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      },
+      "fk_0": {
+        "columns": [
+          "permission_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "auth_permission",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      },
+      "fk_1": {
+        "columns": [
+          "user_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "auth_user",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      }
+    }
+  },
+  "auth_user": {
+    "fields": [
+      {
+        "column": "id",
+        "django_type": "AutoField",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": true,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "password",
+        "django_type": "CharField",
+        "resolved_type": "varchar(128)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "last_login",
+        "django_type": "DateTimeField",
+        "resolved_type": "datetime",
+        "null": true,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "is_superuser",
+        "django_type": "BooleanField",
+        "resolved_type": "bool",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": "False",
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "username",
+        "django_type": "CharField",
+        "resolved_type": "varchar(150)",
+        "null": false,
+        "primary_key": false,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "first_name",
+        "django_type": "CharField",
+        "resolved_type": "varchar(150)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "last_name",
+        "django_type": "CharField",
+        "resolved_type": "varchar(150)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "email",
+        "django_type": "CharField",
+        "resolved_type": "varchar(254)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "is_staff",
+        "django_type": "BooleanField",
+        "resolved_type": "bool",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": "False",
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "is_active",
+        "django_type": "BooleanField",
+        "resolved_type": "bool",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": "True",
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "date_joined",
+        "django_type": "DateTimeField",
+        "resolved_type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": "<function now at 0x0000027940E02CA0>",
+        "auto_now": false,
+        "auto_now_add": false
+      }
+    ],
+    "ddl": "CREATE TABLE \"auth_user\" (\"id\" integer NOT NULL PRIMARY KEY AUTOINCREMENT, \"password\" varchar(128) NOT NULL, \"last_login\" datetime NULL, \"is_superuser\" bool NOT NULL, \"username\" varchar(150) NOT NULL UNIQUE, \"last_name\" varchar(150) NOT NULL, \"email\" varchar(254) NOT NULL, \"is_staff\" bool NOT NULL, \"is_active\" bool NOT NULL, \"date_joined\" datetime NOT NULL, \"first_name\" varchar(150) NOT NULL)",
+    "columns": [
+      [
+        0,
+        "id",
+        "INTEGER",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "password",
+        "varchar(128)",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "last_login",
+        "datetime",
+        0,
+        null,
+        0
+      ],
+      [
+        3,
+        "is_superuser",
+        "bool",
+        1,
+        null,
+        0
+      ],
+      [
+        4,
+        "username",
+        "varchar(150)",
+        1,
+        null,
+        0
+      ],
+      [
+        5,
+        "last_name",
+        "varchar(150)",
+        1,
+        null,
+        0
+      ],
+      [
+        6,
+        "email",
+        "varchar(254)",
+        1,
+        null,
+        0
+      ],
+      [
+        7,
+        "is_staff",
+        "bool",
+        1,
+        null,
+        0
+      ],
+      [
+        8,
+        "is_active",
+        "bool",
+        1,
+        null,
+        0
+      ],
+      [
+        9,
+        "date_joined",
+        "datetime",
+        1,
+        null,
+        0
+      ],
+      [
+        10,
+        "first_name",
+        "varchar(150)",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [],
+    "constraints": {
+      "__unnamed_constraint_1__": {
+        "unique": true,
+        "columns": [
+          "username"
+        ],
+        "primary_key": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      },
+      "__primary__": {
+        "columns": [
+          "id"
+        ],
+        "primary_key": true,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      }
+    }
+  },
+  "django_content_type": {
+    "fields": [
+      {
+        "column": "id",
+        "django_type": "AutoField",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": true,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "app_label",
+        "django_type": "CharField",
+        "resolved_type": "varchar(100)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "model",
+        "django_type": "CharField",
+        "resolved_type": "varchar(100)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      }
+    ],
+    "ddl": "CREATE TABLE \"django_content_type\" (\"id\" integer NOT NULL PRIMARY KEY AUTOINCREMENT, \"app_label\" varchar(100) NOT NULL, \"model\" varchar(100) NOT NULL)",
+    "columns": [
+      [
+        0,
+        "id",
+        "INTEGER",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "app_label",
+        "varchar(100)",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "model",
+        "varchar(100)",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [],
+    "constraints": {
+      "django_content_type_app_label_model_76bd3d3b_uniq": {
+        "columns": [
+          "app_label",
+          "model"
+        ],
+        "primary_key": false,
+        "unique": true,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC",
+          "ASC"
+        ]
+      },
+      "__primary__": {
+        "columns": [
+          "id"
+        ],
+        "primary_key": true,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      }
+    }
+  },
+  "marketplace_listing": {
+    "fields": [
+      {
+        "column": "id",
+        "django_type": "BigAutoField",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": true,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "seller_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "auth_user",
+        "on_delete": "PROTECT",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "title",
+        "django_type": "CharField",
+        "resolved_type": "varchar(200)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "description",
+        "django_type": "TextField",
+        "resolved_type": "text",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "category",
+        "django_type": "CharField",
+        "resolved_type": "varchar(100)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "starting_price",
+        "django_type": "DecimalField",
+        "resolved_type": "decimal",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "status",
+        "django_type": "CharField",
+        "resolved_type": "varchar(8)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": "ACTIVE",
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "created_at",
+        "django_type": "DateTimeField",
+        "resolved_type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": true
+      },
+      {
+        "column": "updated_at",
+        "django_type": "DateTimeField",
+        "resolved_type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": true,
+        "auto_now_add": false
+      }
+    ],
+    "ddl": "CREATE TABLE \"marketplace_listing\" (\"id\" integer NOT NULL PRIMARY KEY AUTOINCREMENT, \"title\" varchar(200) NOT NULL, \"description\" text NOT NULL, \"category\" varchar(100) NOT NULL, \"starting_price\" decimal NOT NULL, \"status\" varchar(8) NOT NULL, \"created_at\" datetime NOT NULL, \"updated_at\" datetime NOT NULL, \"seller_id\" integer NOT NULL REFERENCES \"auth_user\" (\"id\") DEFERRABLE INITIALLY DEFERRED, CONSTRAINT \"listing_positive_price\" CHECK (\"starting_price\" > '0'), CONSTRAINT \"listing_valid_status\" CHECK (\"status\" IN ('ACTIVE', 'INACTIVE')))",
+    "columns": [
+      [
+        0,
+        "id",
+        "INTEGER",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "title",
+        "varchar(200)",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "description",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        3,
+        "category",
+        "varchar(100)",
+        1,
+        null,
+        0
+      ],
+      [
+        4,
+        "starting_price",
+        "decimal",
+        1,
+        null,
+        0
+      ],
+      [
+        5,
+        "status",
+        "varchar(8)",
+        1,
+        null,
+        0
+      ],
+      [
+        6,
+        "created_at",
+        "datetime",
+        1,
+        null,
+        0
+      ],
+      [
+        7,
+        "updated_at",
+        "datetime",
+        1,
+        null,
+        0
+      ],
+      [
+        8,
+        "seller_id",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        0,
+        0,
+        "auth_user",
+        "seller_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "constraints": {
+      "listing_positive_price": {
+        "check": true,
+        "columns": [
+          "starting_price"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "index": false
+      },
+      "listing_valid_status": {
+        "check": true,
+        "columns": [
+          "status"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "index": false
+      },
+      "marketplace_title_7bdd5a_idx": {
+        "columns": [
+          "title"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "marketplace_seller__639ce1_idx": {
+        "columns": [
+          "seller_id",
+          "status"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC",
+          "ASC"
+        ]
+      },
+      "marketplace_status_a6670d_idx": {
+        "columns": [
+          "status",
+          "category"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC",
+          "ASC"
+        ]
+      },
+      "marketplace_listing_seller_id_56a0f16d": {
+        "columns": [
+          "seller_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "__primary__": {
+        "columns": [
+          "id"
+        ],
+        "primary_key": true,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      },
+      "fk_0": {
+        "columns": [
+          "seller_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "auth_user",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      }
+    }
+  },
+  "marketplace_offer": {
+    "fields": [
+      {
+        "column": "id",
+        "django_type": "BigAutoField",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": true,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "listing_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "bigint",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "marketplace_listing",
+        "on_delete": "PROTECT",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "buyer_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "auth_user",
+        "on_delete": "PROTECT",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "offered_price",
+        "django_type": "DecimalField",
+        "resolved_type": "decimal",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "message",
+        "django_type": "TextField",
+        "resolved_type": "text",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "status",
+        "django_type": "CharField",
+        "resolved_type": "varchar(10)",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": "PENDING",
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "created_at",
+        "django_type": "DateTimeField",
+        "resolved_type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": true
+      },
+      {
+        "column": "updated_at",
+        "django_type": "DateTimeField",
+        "resolved_type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": true,
+        "auto_now_add": false
+      }
+    ],
+    "ddl": "CREATE TABLE \"marketplace_offer\" (\"id\" integer NOT NULL PRIMARY KEY AUTOINCREMENT, \"offered_price\" decimal NOT NULL, \"message\" text NOT NULL, \"status\" varchar(10) NOT NULL, \"created_at\" datetime NOT NULL, \"updated_at\" datetime NOT NULL, \"buyer_id\" integer NOT NULL REFERENCES \"auth_user\" (\"id\") DEFERRABLE INITIALLY DEFERRED, \"listing_id\" bigint NOT NULL REFERENCES \"marketplace_listing\" (\"id\") DEFERRABLE INITIALLY DEFERRED, CONSTRAINT \"offer_positive_price\" CHECK (\"offered_price\" > '0'), CONSTRAINT \"offer_valid_status\" CHECK (\"status\" IN ('PENDING', 'ACCEPTED', 'REJECTED', 'COMPLETED')))",
+    "columns": [
+      [
+        0,
+        "id",
+        "INTEGER",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "offered_price",
+        "decimal",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "message",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        3,
+        "status",
+        "varchar(10)",
+        1,
+        null,
+        0
+      ],
+      [
+        4,
+        "created_at",
+        "datetime",
+        1,
+        null,
+        0
+      ],
+      [
+        5,
+        "updated_at",
+        "datetime",
+        1,
+        null,
+        0
+      ],
+      [
+        6,
+        "buyer_id",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        7,
+        "listing_id",
+        "bigint",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        0,
+        0,
+        "marketplace_listing",
+        "listing_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        1,
+        0,
+        "auth_user",
+        "buyer_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "constraints": {
+      "offer_positive_price": {
+        "check": true,
+        "columns": [
+          "offered_price"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "index": false
+      },
+      "offer_valid_status": {
+        "check": true,
+        "columns": [
+          "status"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "index": false
+      },
+      "marketplace_listing_6b4340_idx": {
+        "columns": [
+          "listing_id",
+          "status"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC",
+          "ASC"
+        ]
+      },
+      "marketplace_buyer_i_b1e5a0_idx": {
+        "columns": [
+          "buyer_id",
+          "status"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC",
+          "ASC"
+        ]
+      },
+      "marketplace_offer_listing_id_ab2831b2": {
+        "columns": [
+          "listing_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "marketplace_offer_buyer_id_c8d440ec": {
+        "columns": [
+          "buyer_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "__primary__": {
+        "columns": [
+          "id"
+        ],
+        "primary_key": true,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      },
+      "fk_0": {
+        "columns": [
+          "listing_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "marketplace_listing",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      },
+      "fk_1": {
+        "columns": [
+          "buyer_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "auth_user",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      }
+    }
+  },
+  "marketplace_review": {
+    "fields": [
+      {
+        "column": "id",
+        "django_type": "BigAutoField",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": true,
+        "unique": true,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "offer_id",
+        "django_type": "OneToOneField",
+        "resolved_type": "bigint",
+        "null": false,
+        "primary_key": false,
+        "unique": true,
+        "related_table": "marketplace_offer",
+        "on_delete": "PROTECT",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "reviewer_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "auth_user",
+        "on_delete": "PROTECT",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "seller_id",
+        "django_type": "ForeignKey",
+        "resolved_type": "integer",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": "auth_user",
+        "on_delete": "PROTECT",
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "rating",
+        "django_type": "PositiveSmallIntegerField",
+        "resolved_type": "smallint unsigned",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "comment",
+        "django_type": "TextField",
+        "resolved_type": "text",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": false
+      },
+      {
+        "column": "created_at",
+        "django_type": "DateTimeField",
+        "resolved_type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "unique": false,
+        "related_table": null,
+        "on_delete": null,
+        "default": null,
+        "auto_now": false,
+        "auto_now_add": true
+      }
+    ],
+    "ddl": "CREATE TABLE \"marketplace_review\" (\"id\" integer NOT NULL PRIMARY KEY AUTOINCREMENT, \"rating\" smallint unsigned NOT NULL CHECK (\"rating\" >= 0), \"comment\" text NOT NULL, \"created_at\" datetime NOT NULL, \"offer_id\" bigint NOT NULL UNIQUE REFERENCES \"marketplace_offer\" (\"id\") DEFERRABLE INITIALLY DEFERRED, \"reviewer_id\" integer NOT NULL REFERENCES \"auth_user\" (\"id\") DEFERRABLE INITIALLY DEFERRED, \"seller_id\" integer NOT NULL REFERENCES \"auth_user\" (\"id\") DEFERRABLE INITIALLY DEFERRED, CONSTRAINT \"review_rating_range\" CHECK ((\"rating\" >= 1 AND \"rating\" <= 5)))",
+    "columns": [
+      [
+        0,
+        "id",
+        "INTEGER",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "rating",
+        "smallint unsigned",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "comment",
+        "TEXT",
+        1,
+        null,
+        0
+      ],
+      [
+        3,
+        "created_at",
+        "datetime",
+        1,
+        null,
+        0
+      ],
+      [
+        4,
+        "offer_id",
+        "bigint",
+        1,
+        null,
+        0
+      ],
+      [
+        5,
+        "reviewer_id",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        6,
+        "seller_id",
+        "INTEGER",
+        1,
+        null,
+        0
+      ]
+    ],
+    "foreign_keys": [
+      [
+        0,
+        0,
+        "auth_user",
+        "seller_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        1,
+        0,
+        "auth_user",
+        "reviewer_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ],
+      [
+        2,
+        0,
+        "marketplace_offer",
+        "offer_id",
+        "id",
+        "NO ACTION",
+        "NO ACTION",
+        "NONE"
+      ]
+    ],
+    "constraints": {
+      "__unnamed_constraint_1__": {
+        "check": true,
+        "columns": [
+          "rating"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "index": false
+      },
+      "__unnamed_constraint_2__": {
+        "unique": true,
+        "columns": [
+          "offer_id"
+        ],
+        "primary_key": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      },
+      "review_rating_range": {
+        "check": true,
+        "columns": [
+          "rating",
+          "rating"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "index": false
+      },
+      "marketplace_review_seller_id_eb282ce5": {
+        "columns": [
+          "seller_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "marketplace_review_reviewer_id_b90e91d7": {
+        "columns": [
+          "reviewer_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": true,
+        "type": "idx",
+        "orders": [
+          "ASC"
+        ]
+      },
+      "__primary__": {
+        "columns": [
+          "id"
+        ],
+        "primary_key": true,
+        "unique": false,
+        "foreign_key": null,
+        "check": false,
+        "index": false
+      },
+      "fk_0": {
+        "columns": [
+          "seller_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "auth_user",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      },
+      "fk_1": {
+        "columns": [
+          "reviewer_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "auth_user",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      },
+      "fk_2": {
+        "columns": [
+          "offer_id"
+        ],
+        "primary_key": false,
+        "unique": false,
+        "foreign_key": [
+          "marketplace_offer",
+          "id"
+        ],
+        "check": false,
+        "index": false
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@ from .models import Listing, Offer, Review
 
 class RegistrationForm(UserCreationForm):
     role = forms.ChoiceField(choices=[('Buyer', 'I want to hire'), ('Seller', 'I want to offer services')])
-    class Meta:
+    class Meta(UserCreationForm.Meta):
         model = User
         fields = ['username', 'email', 'role', 'password1', 'password2']
     @transaction.atomic

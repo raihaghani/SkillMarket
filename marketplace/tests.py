@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User, Group
 from django.test import TestCase, override_settings
 from rest_framework.test import APIClient
+from unittest.mock import patch
+from django.db import IntegrityError
+from .forms import RegistrationForm
 from .models import Listing, Offer, Review
 from . import services
 
@@ -160,3 +163,82 @@ class MarketplaceTests(TestCase):
         self.assertEqual(self.client.get(f'/seller/listings/{self.listing.pk}/edit/').status_code,403)
         self.client.force_login(self.seller)
         self.assertEqual(self.client.get(f'/seller/listings/{self.listing.pk}/delete/').status_code,405)
+
+
+@override_settings(STORAGES={'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'}, 'staticfiles': {'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage'}})
+class RegistrationTests(TestCase):
+    password = 'StrongNewPass!234'
+
+    def registration_data(self, username='new_member', role='Buyer'):
+        return {'username': username, 'email': 'member@example.com', 'role': role,
+                'password1': self.password, 'password2': self.password}
+
+    def test_existing_username_is_rejected_before_save(self):
+        existing = User.objects.create_user('existing_member', password='OriginalPassword!459')
+        for username in ['existing_member', 'EXISTING_MEMBER', ' existing_member ']:
+            with self.subTest(username=username), patch.object(RegistrationForm, 'save') as save:
+                response = self.client.post('/register/', self.registration_data(username))
+                self.assertContains(response, 'A user with that username already exists.')
+                self.assertIn('username', response.context['form'].errors)
+                save.assert_not_called()
+        existing.refresh_from_db()
+        self.assertTrue(existing.check_password('OriginalPassword!459'))
+        self.assertEqual(User.objects.count(), 1)
+        self.assertNotIn('_auth_user_id', self.client.session)
+
+    def test_normalized_username_uses_builtin_case_insensitive_validation(self):
+        User.objects.create_user('member', password=self.password)
+        # NFKC-normalized full-width uppercase spelling must be checked before save.
+        form = RegistrationForm(self.registration_data('\uff2d\uff25\uff2d\uff22\uff25\uff32'))
+        self.assertFalse(form.is_valid())
+        self.assertIn('username', form.errors)
+
+    def test_successful_buyer_and_seller_registration_ignores_privileges(self):
+        for role in ['Buyer', 'Seller']:
+            with self.subTest(role=role):
+                data = self.registration_data('new_' + role.lower(), role)
+                data.update(is_staff=True, is_superuser=True, groups=['Administrators'], user_permissions=['1'])
+                response = self.client.post('/register/', data)
+                self.assertRedirects(response, '/dashboard/', fetch_redirect_response=False)
+                user = User.objects.get(username=data['username'])
+                self.assertEqual(user.email, data['email'])
+                self.assertTrue(user.check_password(self.password))
+                self.assertEqual(list(user.groups.values_list('name', flat=True)), [role])
+                self.assertFalse(user.is_staff)
+                self.assertFalse(user.is_superuser)
+                self.assertFalse(user.user_permissions.exists())
+                self.assertEqual(int(self.client.session['_auth_user_id']), user.pk)
+                self.client.logout()
+
+    def test_administrator_role_is_rejected(self):
+        response = self.client.post('/register/', self.registration_data(role='Administrator'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('role', response.context['form'].errors)
+        self.assertFalse(User.objects.exists())
+
+    def test_username_taken_after_validation_returns_field_error(self):
+        original_save = RegistrationForm.save
+        winners = []
+
+        def competing_registration(form, commit=True):
+            # Deterministically simulate another request committing after is_valid().
+            winners.append(User.objects.create_user(form.cleaned_data['username'], password='OtherPassword!459'))
+            return original_save(form, commit=commit)
+
+        with patch.object(RegistrationForm, 'save', competing_registration):
+            response = self.client.post('/register/', self.registration_data('raced_member'))
+        self.assertContains(response, 'A user with that username already exists.')
+        self.assertIn('username', response.context['form'].errors)
+        self.assertEqual(User.objects.count(), 1)
+        self.assertTrue(winners[0].check_password('OtherPassword!459'))
+        self.assertFalse(winners[0].groups.exists())
+        self.assertNotIn('_auth_user_id', self.client.session)
+        # The failed insert must not leave the connection/transaction unusable.
+        response = self.client.post('/register/', self.registration_data('after_race'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_unrelated_integrity_error_is_not_reported_as_duplicate_username(self):
+        with patch.object(RegistrationForm, 'save', side_effect=IntegrityError('unrelated constraint')):
+            with self.assertRaisesMessage(IntegrityError, 'unrelated constraint'):
+                self.client.post('/register/', self.registration_data())
+        self.assertFalse(User.objects.exists())
