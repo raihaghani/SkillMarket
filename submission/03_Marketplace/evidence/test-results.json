@@ -1,0 +1,155 @@
+{
+  "database": "django.db.backends.postgresql",
+  "results": [
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_01_seller_create",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_02_buyer_cannot_create",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_03_other_seller_cannot_edit",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_04_owner_edit",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_05_delete_unused",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_06_protect_history",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_07_submit_offer",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_08_invalid_prices",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_09_seller_cannot_offer",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_10_inactive_listing",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_11_accept_complete_review",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_12_reject_blocks_complete",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_13_pending_cannot_complete",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_14_accept_retry",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_15_buyer_cannot_accept",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_16_other_seller_cannot_accept",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_17_private_offers",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_18_review_before_completion",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_19_unrelated_review",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_20_duplicate_review",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_21_rating_boundaries_valid",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_22_rating_boundaries_invalid",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_23_search_regression",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_24_anonymous_write_denied",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_25_csrf_enforced",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_26_registration_roles_and_privilege",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_27_html_pages",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_28_html_end_to_end",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_29_invalid_content_and_missing",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    },
+    {
+      "test": "marketplace.tests.MarketplaceTests.test_30_html_ownership_and_safe_methods",
+      "status": "PASS",
+      "actual": "All assertions passed."
+    }
+  ]
+}

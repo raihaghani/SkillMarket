@@ -1,0 +1,2 @@
+{"name":"skillmarket","private":true,"scripts":{"build:css":"tailwindcss -i ./assets/input.css -o ./static/app.css --minify"},"devDependencies":{"@tailwindcss/cli":"^4.1.0","tailwindcss":"^4.1.0"}}
+

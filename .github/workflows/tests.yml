@@ -1,0 +1,30 @@
+name: Marketplace checks
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_PASSWORD: test-only
+          POSTGRES_DB: skillmarket
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      SKILLMARKET_DEBUG: 'True'
+      SECRET_KEY: ci-only-not-a-production-secret
+      DATABASE_URL: postgresql://postgres:test-only@localhost:5432/skillmarket
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python manage.py makemigrations --check --dry-run
+      - run: python manage.py collectstatic --noinput
+      - run: python manage.py test marketplace

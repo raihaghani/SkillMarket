@@ -1,0 +1,35 @@
+test_01_seller_create (marketplace.tests.MarketplaceTests.test_01_seller_create) ... ok
+test_02_buyer_cannot_create (marketplace.tests.MarketplaceTests.test_02_buyer_cannot_create) ... ok
+test_03_other_seller_cannot_edit (marketplace.tests.MarketplaceTests.test_03_other_seller_cannot_edit) ... ok
+test_04_owner_edit (marketplace.tests.MarketplaceTests.test_04_owner_edit) ... ok
+test_05_delete_unused (marketplace.tests.MarketplaceTests.test_05_delete_unused) ... ok
+test_06_protect_history (marketplace.tests.MarketplaceTests.test_06_protect_history) ... ok
+test_07_submit_offer (marketplace.tests.MarketplaceTests.test_07_submit_offer) ... ok
+test_08_invalid_prices (marketplace.tests.MarketplaceTests.test_08_invalid_prices) ... ok
+test_09_seller_cannot_offer (marketplace.tests.MarketplaceTests.test_09_seller_cannot_offer) ... ok
+test_10_inactive_listing (marketplace.tests.MarketplaceTests.test_10_inactive_listing) ... ok
+test_11_accept_complete_review (marketplace.tests.MarketplaceTests.test_11_accept_complete_review) ... ok
+test_12_reject_blocks_complete (marketplace.tests.MarketplaceTests.test_12_reject_blocks_complete) ... ok
+test_13_pending_cannot_complete (marketplace.tests.MarketplaceTests.test_13_pending_cannot_complete) ... ok
+test_14_accept_retry (marketplace.tests.MarketplaceTests.test_14_accept_retry) ... ok
+test_15_buyer_cannot_accept (marketplace.tests.MarketplaceTests.test_15_buyer_cannot_accept) ... ok
+test_16_other_seller_cannot_accept (marketplace.tests.MarketplaceTests.test_16_other_seller_cannot_accept) ... ok
+test_17_private_offers (marketplace.tests.MarketplaceTests.test_17_private_offers) ... ok
+test_18_review_before_completion (marketplace.tests.MarketplaceTests.test_18_review_before_completion) ... ok
+test_19_unrelated_review (marketplace.tests.MarketplaceTests.test_19_unrelated_review) ... ok
+test_20_duplicate_review (marketplace.tests.MarketplaceTests.test_20_duplicate_review) ... ok
+test_21_rating_boundaries_valid (marketplace.tests.MarketplaceTests.test_21_rating_boundaries_valid) ... ok
+test_22_rating_boundaries_invalid (marketplace.tests.MarketplaceTests.test_22_rating_boundaries_invalid) ... ok
+test_23_search_regression (marketplace.tests.MarketplaceTests.test_23_search_regression) ... ok
+test_24_anonymous_write_denied (marketplace.tests.MarketplaceTests.test_24_anonymous_write_denied) ... ok
+test_25_csrf_enforced (marketplace.tests.MarketplaceTests.test_25_csrf_enforced) ... ok
+test_26_registration_roles_and_privilege (marketplace.tests.MarketplaceTests.test_26_registration_roles_and_privilege) ... ok
+test_27_html_pages (marketplace.tests.MarketplaceTests.test_27_html_pages) ... ok
+test_28_html_end_to_end (marketplace.tests.MarketplaceTests.test_28_html_end_to_end) ... ok
+test_29_invalid_content_and_missing (marketplace.tests.MarketplaceTests.test_29_invalid_content_and_missing) ... ok
+test_30_html_ownership_and_safe_methods (marketplace.tests.MarketplaceTests.test_30_html_ownership_and_safe_methods) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 3.606s
+
+OK

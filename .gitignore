@@ -1,0 +1,12 @@
+.venv/
+.env
+*.sqlite3
+__pycache__/
+*.pyc
+node_modules/
+staticfiles/
+uv.zip
+tools-bin/
+tmp/
+SkillMarket-submission.zip
+*.inspect.ndjson
